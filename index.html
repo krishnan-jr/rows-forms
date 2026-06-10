@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rows → Forms</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="dot"></span>
+      <h1>Rows&nbsp;→&nbsp;Forms</h1>
+    </div>
+    <p class="tagline">Turn each row of a CSV / XLSX into a copyable form.</p>
+  </header>
+
+  <main>
+    <!-- Upload zone -->
+    <section id="dropzone" class="dropzone">
+      <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" hidden />
+      <div class="dz-inner">
+        <svg viewBox="0 0 24 24" class="dz-icon" aria-hidden="true">
+          <path d="M12 16V4m0 0L8 8m4-4 4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"
+            fill="none" stroke="currentColor" stroke-width="1.6"
+            stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <p class="dz-title">Drop a file here or <span class="link">browse</span></p>
+        <p class="dz-sub">.csv, .xlsx, .xls — processed entirely in your browser</p>
+      </div>
+    </section>
+
+    <!-- Saved sessions -->
+    <section id="sessions" class="sessions hidden">
+      <div class="sessions-head">
+        <h2>Saved sessions</h2>
+        <button id="clearSessions" class="btn ghost">Clear all</button>
+      </div>
+      <div id="sessionsList" class="sessions-list"></div>
+    </section>
+
+    <!-- Config bar -->
+    <section id="config" class="config hidden">
+      <div class="field-group">
+        <label for="headerRow">Header row</label>
+        <select id="headerRow"></select>
+      </div>
+      <div class="field-group">
+        <label for="titleCol">Section title column</label>
+        <select id="titleCol"></select>
+      </div>
+      <div class="field-group">
+        <label>Visible fields</label>
+        <div class="popover-wrap">
+          <button id="fieldsBtn" class="btn" type="button">All fields ▾</button>
+          <div id="fieldsPop" class="popover hidden">
+            <input type="text" id="fieldsSearch" class="popover-search" placeholder="Search fields…" autocomplete="off" />
+            <div class="popover-actions">
+              <button id="fieldsAll" class="link-btn" type="button">Select all</button>
+              <button id="fieldsNone" class="link-btn" type="button">Hide all</button>
+            </div>
+            <div id="fieldsList" class="popover-list"></div>
+          </div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Forms</label>
+        <button id="selectedOnlyBtn" class="btn" type="button">Showing all forms</button>
+      </div>
+      <div class="field-group grow">
+        <label for="search">Search</label>
+        <input type="text" id="search" placeholder="Filter forms…" autocomplete="off" />
+      </div>
+      <div class="config-actions">
+        <button id="expandAll" class="btn ghost">Expand all</button>
+        <button id="collapseAll" class="btn ghost">Collapse all</button>
+        <button id="reset" class="btn ghost">New file</button>
+      </div>
+    </section>
+
+    <p id="meta" class="meta hidden"></p>
+
+    <!-- Forms render here -->
+    <section id="forms" class="forms"></section>
+
+    <div id="empty" class="empty hidden">No rows match your search.</div>
+  </main>
+
+  <!-- toast -->
+  <div id="toast" class="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
