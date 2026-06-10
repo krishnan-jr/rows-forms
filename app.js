@@ -27,8 +27,8 @@ const toastEl    = $("toast");
 const sessionsEl     = $("sessions");
 const sessionsList   = $("sessionsList");
 const clearSessions  = $("clearSessions");
-const fieldsBtn      = $("fieldsBtn");
-const fieldsPop      = $("fieldsPop");
+const fieldsPanel    = $("fieldsPanel");
+const fieldsCount    = $("fieldsCount");
 const fieldsList     = $("fieldsList");
 const fieldsSearch   = $("fieldsSearch");
 const selectedOnlyBtn = $("selectedOnlyBtn");
@@ -154,8 +154,7 @@ fieldsSearch.addEventListener("input", filterFields);
 
 function updateFieldsBtn() {
   const shown = headers.length - hiddenCols.size;
-  fieldsBtn.textContent =
-    (shown === headers.length ? "All fields" : `${shown} of ${headers.length} fields`) + " ▾";
+  fieldsCount.textContent = `${shown}/${headers.length}`;
 }
 
 function setAllFields(visible) {
@@ -165,12 +164,6 @@ function setAllFields(visible) {
   persistConfig();
 }
 
-fieldsBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
-  fieldsPop.classList.toggle("hidden");
-});
-fieldsPop.addEventListener("click", (e) => e.stopPropagation());
-document.addEventListener("click", () => fieldsPop.classList.add("hidden"));
 $("fieldsAll").addEventListener("click", () => setAllFields(true));
 $("fieldsNone").addEventListener("click", () => setAllFields(false));
 
@@ -465,12 +458,14 @@ function showWorkspace() {
   sessionsEl.classList.add("hidden");
   config.classList.remove("hidden");
   metaEl.classList.remove("hidden");
+  fieldsPanel.classList.remove("hidden");
 }
 function showLanding() {
   dropzone.classList.remove("hidden");
   config.classList.add("hidden");
   metaEl.classList.add("hidden");
   emptyEl.classList.add("hidden");
+  fieldsPanel.classList.add("hidden");
   formsEl.innerHTML = "";
   renderSessions();
 }

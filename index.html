@@ -15,6 +15,7 @@
     <p class="tagline">Turn each row of a CSV / XLSX into a copyable form.</p>
   </header>
 
+  <div class="layout">
   <main>
     <!-- Upload zone -->
     <section id="dropzone" class="dropzone">
@@ -50,20 +51,6 @@
         <select id="titleCol"></select>
       </div>
       <div class="field-group">
-        <label>Visible fields</label>
-        <div class="popover-wrap">
-          <button id="fieldsBtn" class="btn" type="button">All fields ▾</button>
-          <div id="fieldsPop" class="popover hidden">
-            <input type="text" id="fieldsSearch" class="popover-search" placeholder="Search fields…" autocomplete="off" />
-            <div class="popover-actions">
-              <button id="fieldsAll" class="link-btn" type="button">Select all</button>
-              <button id="fieldsNone" class="link-btn" type="button">Hide all</button>
-            </div>
-            <div id="fieldsList" class="popover-list"></div>
-          </div>
-        </div>
-      </div>
-      <div class="field-group">
         <label>Forms</label>
         <button id="selectedOnlyBtn" class="btn" type="button">Showing all forms</button>
       </div>
@@ -85,6 +72,21 @@
 
     <div id="empty" class="empty hidden">No rows match your search.</div>
   </main>
+
+  <!-- Visible fields sidebar -->
+  <aside id="fieldsPanel" class="fields-panel hidden">
+    <div class="fp-head">
+      <h2>Visible fields</h2>
+      <span id="fieldsCount" class="fp-count"></span>
+    </div>
+    <input type="text" id="fieldsSearch" class="popover-search" placeholder="Search fields…" autocomplete="off" />
+    <div class="popover-actions">
+      <button id="fieldsAll" class="link-btn" type="button">Select all</button>
+      <button id="fieldsNone" class="link-btn" type="button">Hide all</button>
+    </div>
+    <div id="fieldsList" class="popover-list"></div>
+  </aside>
+  </div>
 
   <!-- toast -->
   <div id="toast" class="toast"></div>
